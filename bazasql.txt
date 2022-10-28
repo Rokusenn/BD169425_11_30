@@ -1,0 +1,18 @@
+ CREATE TABLE postac (id_postaci INT NOT NULL AUTO_INCREMENT PRIMARY KEY,nazwa VARCHAR(40),rodzaj ENUM('wiking','ptak','kobieta'),data_ur DATE,wiek INT UNSIGNED);
+INSERT INTO postac (id_postaci,nazwa,rodzaj,data_ur,wiek) VALUES (NULL,'Bjorn','wiking','1010-06-12','38');
+INSERT INTO postac (id_postaci,nazwa,rodzaj,data_ur,wiek) VALUES (NULL,'Tesciowa','kobieta','980-02-02','69');
+INSERT INTO postac (id_postaci,nazwa,rodzaj,data_ur,wiek) VALUES (NULL,'Drozd','ptak','1001-03-08','9');
+UPDATE postac SET wiek = '88' WHERE id_postaci = 2;
+CREATE TABLE walizka(id_walizki INT NOT NULL AUTO_INCREMENT PRIMARY KEY,pojemnosc INT UNSIGNED,kolor ENUM('rozwoy','czerwony','leczowy','zolty'),id_wlasciciela INT NOT NULL, FOREIGN KEY(id_wlasciciela) REFERENCES postac(id_postaci));
+ALTER TABLE walizka ALTER COLUMN  kolor SET DEFAULT 'rozwoy';
+INSERT INTO walizka(id_walizki,pojemnosc,kolor,id_wlasciciela) VALUES (NULL,'120','rozwoy','1');
+INSERT INTO walizka(id_walizki,pojemnosc,kolor,id_wlasciciela) VALUES (NULL,'60','rozwoy','2');
+ CREATE TABLE izba(adres_budynku INT NOT NULL,nazwa_izby INT NOT NULL,metraz INT UNSIGNED,wlasciciel INT, FOREIGN KEY(wlasciciel) REFERENCES postac(id_postaci),PRIMARY KEY(adres_budynku,nazwa_izby) );
+ ALTER TABLE izba  ADD COLUMN kolor_izby VARCHAR(40);
+ALTER TABLE izba ALTER COLUMN kolor_izby SET DEFAULT 'czarny';
+
+
+
+
+
+
