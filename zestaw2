@@ -1,0 +1,13 @@
+DELETE FROM postac WHERE wiek ="62";
+DELETE FROM postac WHERE wiek ="72";
+ALTER TABLE walizka DROP CONSTRAINT walizka_ibfk_1;
+ALTER TABLE postac MODIFY COLUMN id_postaci INT,DROP PRIMARY KEY;
+ALTER TABLE postac ADD pesel VARCHAR(11) NOT NULL PRIMARY KEY;
+ ALTER TABLE postac MODIFY COLUMN rodzaj enum('wiking','ptak','kobieta','syrena');
+INSERT INTO postac VALUES (NULL,'Gertruda Nieszczera','syrena','1002-12-21','189',NULL);
+UPDATE statek SET max_ladownosc =max_ladownosc-( max_ladownosc*0.3);
+SELECT * FROM postac where wiek <1000;
+DELETE FROM postac WHERE nazwa ="wiking3";
+DELETE FROM stakek;
+DROP TABLE statek;
+CREATE TABLE zwierz(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,nazwa VARCHAR(40),wiek INT);
