@@ -1,0 +1,14 @@
+CREATE TABLE kreatura SELECT * FROM wikingowie. kreatura;
+CREATE TABLE zasob SELECT * FROM wikingowie. zasob;
+CREATE TABLE ekwipunek SELECT * FROM wikingowie. ekwipunek;
+SELECT * FROM zasob;
+SELECT * FROM zasob WHERE rodzaj = "jedzenie";
+SELECT idZasobu,ilosc FROM zasob,kreatura  WHERE idKreatury = 1 AND 3 AND 5;
+SELECT * FROM kreatura WHERE rodzaj = 'wiedzma' AND udzwig >=50;
+SELECT * FROM zasob WHERE waga BETWEEN 2 AND 5;
+SELECT * FROM kreatura WHERE nazwa LIKE '%or%' AND udzwig BETWEEN 30 AND 70;
+SELECT * FROM zasob WHERE MONTH(dataPozyskania) BETWEEN 7 AND 8; 
+SELECT * FROM zasob WHERE rodzaj IS NOT NULL ORDER BY waga;
+SELECT * FROM kreatura ORDER BY dataUr DESC LIMIT 5;
+SELECT DISTINCT(rodzaj) FROM zasob;
+SELECT CONCAT(nazwa,' ',rodzaj) FROM kreatura WHERE rodzaj LIKE 'wi%';
