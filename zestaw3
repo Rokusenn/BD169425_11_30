@@ -12,3 +12,7 @@ SELECT * FROM zasob WHERE rodzaj IS NOT NULL ORDER BY waga;
 SELECT * FROM kreatura ORDER BY dataUr DESC LIMIT 5;
 SELECT DISTINCT(rodzaj) FROM zasob;
 SELECT CONCAT(nazwa,' ',rodzaj) FROM kreatura WHERE rodzaj LIKE 'wi%';
+SELECT nazwa,(waga*ilosc) FROM zasob WHERE YEAR(dataPozyskania) BETWEEN 2000 AND 2007;
+SELECT (waga*0.3)AS waga_odpadu,waga-(waga*0.3)AS masa_wlasciwa FROM zasob;
+SELECT * FROM zasob WHERE rodzaj IS NULL;
+ SELECT DISTINCT(nazwa) FROM zasob WHERE (nazwa LIKE 'ba%' OR nazwa LIKE '%os');
