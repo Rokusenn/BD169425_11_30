@@ -1,0 +1,7 @@
+SELECT AVG(waga) FROM kreatura WHERE rodzaj = 'wiking';
+SELECT rodzaj, AVG(waga) FROM kreatura GROUP BY rodzaj;
+SELECT rodzaj, AVG(YEAR(dataUr)) FROM kreatura GROUP BY rodzaj;
+SELECT rodzaj,SUM(waga) FROM zasob GROUP BY rodzaj;
+SELECT nazwa,AVG(waga) FROM zasob WHERE ilosc >= 4 GROUP BY nazwa HAVING SUM(nazwa)>=10;
+SELECT nazwa,COUNT(rodzaj) FROM zasob GROUP BY rodzaj HAVING COUNT(nazwa)>1;
+SELECT kreatura.nazwa,zasob.nazwa FROM kreatura INNER JOIN zasob ON kreatura.nazwa = zasob.nazwa;
