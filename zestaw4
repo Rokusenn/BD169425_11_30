@@ -4,4 +4,11 @@ SELECT rodzaj, AVG(YEAR(dataUr)) FROM kreatura GROUP BY rodzaj;
 SELECT rodzaj,SUM(waga) FROM zasob GROUP BY rodzaj;
 SELECT nazwa,AVG(waga) FROM zasob WHERE ilosc >= 4 GROUP BY nazwa HAVING SUM(nazwa)>=10;
 SELECT nazwa,COUNT(rodzaj) FROM zasob GROUP BY rodzaj HAVING COUNT(nazwa)>1;
+SELECT kreatura.nazwa,ekwipunek.ilosc FROM kreatura,ekwipunek WHERE kreatura.idKreatury = ekwipunek.idKreatury;
 SELECT kreatura.nazwa,zasob.nazwa FROM kreatura INNER JOIN zasob ON kreatura.nazwa = zasob.nazwa;
+SELECT kreatura.nazwa,zasob.nazwa FROM kreatura,ekwipunek,zasob WHERE kreatura.idKreatury = ekwipunek.idKreatury AND zasob.idZasobu = ekwipunek.idZasobu;
+SELECT kreatura.nazwa,ekwipunek.idKreatury FROM kreatura LEFT JOIN ekwipunek ON kreatura.idKreatury = ekwipunek.idKreatury WHERE ekwipunek.idKreatury IS NULL;
+SELECT kreatura.nazwa,zasob.nazwa FROM kreatura,zasob,ekwipunek  WHERE kreatura.idKreatury=ekwipunek.idKreatury AND zasob.idZasobu = ekwipunek.idZasobu AND kreatura.rodzaj = 'wiking' AND YEAR(kreatura.dataUr)>=1670;
+SELECT kreatura.nazwa FROM kreatura,ekwipunek,zasob WHERE kreatura.idKreatury = ekwipunek.idkreatury AND zasob.idZasobu = ekwipunek.idZasobu AND zasob.rodzaj='jedzenie' ORDER BY dataUr DESC LIMIT 5;
+////////////////////////////////////
+SELECT kreatura.rodzaj FROM kreatura,ekwipunek,zasob WHERE kreatura.idKreatury = ekwipunek.idKreatury AND zasob.idZasobu = ekwipunek.idZasobu  GROUP BY kreatura.rodzaj HAVING AVG(zasob.waga);
