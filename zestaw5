@@ -1,0 +1,10 @@
+//1.1
+CREATE TABLE uczestnicy SELECT * FROM wikingowie.uczestnicy;
+CREATE TABLE etapy_wyprawy SELECT * FROM wikingowie.etapy_wyprawy;
+CREATE TABLE sektor SELECT * FROM wikingowie.sektor;
+CREATE TABLE wyprawa  SELECT * FROM wikingowie.wyprawa;
+//1.2
+//Łączenia tabel klucze główne i obce;
+SELECT kreatura.nazwa,ekwipunek.idKreatury FROM kreatura LEFT JOIN ekwipunek ON kreatura.idKreatury = ekwipunek.idKreatury WHERE ekwipunek.idKreatury IS NULL;
+SELECT kreatura.nazwa,zasob.nazwa FROM kreatura,zasob,ekwipunek  WHERE kreatura.idKreatury=ekwipunek.idKreatury AND zasob.idZasobu = ekwipunek.idZasobu AND kreatura.rodzaj = 'wiking' AND YEAR(kreatura.dataUr)>=1670;
+SELECT kreatura.nazwa FROM kreatura,ekwipunek,zasob WHERE kreatura.idKreatury = ekwipunek.idkreatury AND zasob.idZasobu = ekwipunek.idZasobu AND zasob.rodzaj='jedzenie' ORDER BY dataUr DESC LIMIT 5;
