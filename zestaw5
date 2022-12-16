@@ -8,3 +8,19 @@ CREATE TABLE wyprawa  SELECT * FROM wikingowie.wyprawa;
 SELECT kreatura.nazwa,ekwipunek.idKreatury FROM kreatura LEFT JOIN ekwipunek ON kreatura.idKreatury = ekwipunek.idKreatury WHERE ekwipunek.idKreatury IS NULL;
 SELECT kreatura.nazwa,zasob.nazwa FROM kreatura,zasob,ekwipunek  WHERE kreatura.idKreatury=ekwipunek.idKreatury AND zasob.idZasobu = ekwipunek.idZasobu AND kreatura.rodzaj = 'wiking' AND YEAR(kreatura.dataUr)>=1670;
 SELECT kreatura.nazwa FROM kreatura,ekwipunek,zasob WHERE kreatura.idKreatury = ekwipunek.idkreatury AND zasob.idZasobu = ekwipunek.idZasobu AND zasob.rodzaj='jedzenie' ORDER BY dataUr DESC LIMIT 5;
+1.3
+// SELECT kreatura1.nazwa,wyprawa.nazwa FROM kreatura1,wyprawa WHERE kreatura1.idKreatury = wyprawa.kierownik;
+SELECT wyprawa.nazwa,SUM(ekwipunek.ilosc) FROM ekwipunek JOIN kreatura1 ON ekwipunek.idKreatury = kreatura1.idKreatury JOIN wyprawa ON wyprawa.kierownik = kreatura1.idKreatury GROUP BY wyprawa.nazwa;
+//powinno byc inaczej
+
+2.1
+//SELECT wyprawa.nazwa,COUNT(uczestnicy.id_uczestnika) FROM wyprawa LEFT JOIN uczestnicy ON wyprawa.id_wyprawy = uczestnicy.id_wyprawy GROUP BY wyprawa.nazwa;
+SELECT wyprawa.nazwa,COUNT(uczestnicy.id_uczestnika),GROUP_CONCAT(kreatura1.nazwa) FROM wyprawa LEFT JOIN uczestnicy ON wyprawa.id_wyprawy = uczestnicy.id_wyprawy JOIN kreatura1 ON kreatura1.idKreatury=uczestnicy.id_uczestnika GROUP BY wyprawa.nazwa;
+2.2
+//ALTER TABLE etapy_wyprawy ADD FOREIGN KEY(sektor) REFERENCES sektor(id_sektora);
+ SELECT etapy_wyprawy.dziennik,sektor.nazwa,kreatura1.nazwa FROM etapy_wyprawy,sektor,wyprawa,kreatura1 WHERE etapy_wyprawy.sektor = sektor.id_sektora AND etapy_wyprawy.idWyprawy = wyprawa.id_wyprawy
+AND kreatura1.idKreatury=wyprawa.kierownik ORDER BY wyprawa.data_rozpoczecia,etapy_wyprawy.kolejnosc;
+3.1
+SELECT sektor.id_sektora,COUNT(etapy_wyprawy.sektor) FROM etapy_wyprawy RIGHT JOIN sektor ON etapy_wyprawy.sektor = sektor.id_sektora GROUP BY sektor.id_sektora;
+3.2
+
