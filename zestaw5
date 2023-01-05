@@ -21,6 +21,12 @@ SELECT wyprawa.nazwa,COUNT(uczestnicy.id_uczestnika),GROUP_CONCAT(kreatura1.nazw
  SELECT etapy_wyprawy.dziennik,sektor.nazwa,kreatura1.nazwa FROM etapy_wyprawy,sektor,wyprawa,kreatura1 WHERE etapy_wyprawy.sektor = sektor.id_sektora AND etapy_wyprawy.idWyprawy = wyprawa.id_wyprawy
 AND kreatura1.idKreatury=wyprawa.kierownik ORDER BY wyprawa.data_rozpoczecia,etapy_wyprawy.kolejnosc;
 3.1
-SELECT sektor.id_sektora,COUNT(etapy_wyprawy.sektor) FROM etapy_wyprawy RIGHT JOIN sektor ON etapy_wyprawy.sektor = sektor.id_sektora GROUP BY sektor.id_sektora;
+SELECT sektor.nazwa,IFNULL(NULL,COUNT(etapy_wyprawy.sektor)) AS ilosc_odwiedzin FROM sektor JOIN etapy_wyprawy ON sektor.id_sektora = etapy_wyprawy.sektor GROUP BY sektor.nazwa;
 3.2
-
+SELECT kreatura1.nazwa,COUNT(IF(uczestnicy.id_wyprawy>0,"bral udzaial w wyprawie","nie bral udzialu w wyprawie")) FROM uczestnicy JOIN kreatura1 ON uczestnicy.id_uczestnika=kreatura1.idKreatury GROUP BY kreatura1.nazwa;
+4.1
+SELECT wyprawa.nazwa,etapy_wyprawy.dziennik FROM etapy_wyprawy RIGHT JOIN wyprawa ON wyprawa.id_wyprawy = etapy_wyprawy.idWyprawy GROUP BY wyprawa.nazwa HAVING SUM(LENGTH(etapy_wyprawy.dziennik))<400 ;
+4.2
+//SELECT etapy_wyprawy.idWyprawy FROM etapy_wyprawy,sektor WHERE etapy_wyprawy.sektor = sektor.id_sektora AND sektor.id_sektora = 7;
+5.1
+SELECT kreatura1.nazwa,DATEEDIFF(day,kreatura1.dataUr,wyprawa.data_rozpoczecia FROM kreatura1,wyprawa,uczestnicy WHERE uczestnicy.id_uczestnika = kreatura1.idKreatury AND uczestnicy.id_wyprawy = wyprawa.id_wyprawy GROUP BY kreatura1.nazwa;
